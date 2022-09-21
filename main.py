@@ -37,7 +37,7 @@ gravatar = Gravatar(app,
                     use_ssl=False,
                     base_url=None)
 
-
+db.create_all()
 # CONFIGURE TABLES
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
