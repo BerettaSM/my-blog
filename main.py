@@ -1,4 +1,4 @@
-import secrets
+import os
 from datetime import date
 from functools import wraps
 from http import HTTPStatus
@@ -16,12 +16,12 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from html_sanitization import strip_invalid_html
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = secrets.token_hex(32)
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
